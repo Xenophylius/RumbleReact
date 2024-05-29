@@ -33,7 +33,7 @@ const ButtonCapacity = props => {
             type: "fight/healing",
             payload: {
                 heal: 100,
-                mana: 10,
+                mana: 5,
                 id: props.player.id
             }
         })

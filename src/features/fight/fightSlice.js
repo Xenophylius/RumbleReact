@@ -5,6 +5,7 @@ import students from "./students.json";
 let randomNumber1 = Math.floor(Math.random() * 7)
 let randomNumber2 = Math.floor(Math.random() * 13)
 
+
 const initialState = {
   players: [
     { name: students[randomNumber1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 0, image: students[randomNumber1].image, home: students[randomNumber1].house },
@@ -44,13 +45,14 @@ export const fightSlice = createSlice({
     },
 
     hitBack: (state, action) => {
-      
+      let hit = action.payload.hit + Math.floor(Math.random() * 5)
+
       if (state.countLap % 4 === 0) {
         for (let i = 0; i < 4; i++) {
-          state.players[i].pv = state.players[i].pv - (action.payload.hit * 5)
+          state.players[i].pv = state.players[i].pv - (hit * 4)
 
          
-          document.querySelector("#spanHero" + i).innerHTML = '- ' + action.payload.hit + ' PV'
+          document.querySelector("#spanHero" + i).innerHTML = '- ' + hit  + ' PV'
 
       document.querySelector("#spanHero"  + i).className = "degatSpanHero"
       window.requestAnimationFrame(function (time) {
@@ -90,7 +92,7 @@ export const fightSlice = createSlice({
       });
       }
 
-      state.players[action.payload.id].pv = state.players[action.payload.id].pv - action.payload.hit
+      state.players[action.payload.id].pv = state.players[action.payload.id].pv - hit
 
       document.querySelector("#card" + action.payload.id).className = "card-body text-center m-0 p-0";
       window.requestAnimationFrame(function (time) {
@@ -99,7 +101,7 @@ export const fightSlice = createSlice({
         });
       });
 
-      document.querySelector("#spanHero" + action.payload.id).innerHTML = '- ' + action.payload.hit + ' PV'
+      document.querySelector("#spanHero" + action.payload.id).innerHTML = '- ' + hit + ' PV'
 
       document.querySelector("#spanHero"  + action.payload.id).className = "degatSpanHero";
       window.requestAnimationFrame(function (time) {
@@ -109,7 +111,18 @@ export const fightSlice = createSlice({
       });
     },
 
+    // animationFrame: (state, action) => {
+    //   document.querySelector(action.payload.div + action.payload.id).innerHTML = '- ' + action.payload.hit + ' PV'
+    //   document.querySelector(action.payload.div  + action.payload.id).className = action.payload.classStart;
+    //   window.requestAnimationFrame(function (time) {
+    //     window.requestAnimationFrame(function (time) {
+    //       document.querySelector(action.payload.div  + action.payload.id).className = action.payload.classAnimate;
+    //     });
+    //   });
+    // },
+
     healing: (state, action) => {
+
       state.players[action.payload.id].pv = state.players[action.payload.id].pv + action.payload.heal
       state.players[action.payload.id].mana = state.players[action.payload.id].mana - action.payload.mana
       
@@ -120,6 +133,8 @@ export const fightSlice = createSlice({
         });
       });
 
+    
+
       document.querySelector("#healingHero" + action.payload.id).innerHTML = '+ ' + action.payload.heal + ' PV'
 
       document.querySelector("#healingHero"  + action.payload.id).className = "healinigSpanHero";
@@ -128,6 +143,7 @@ export const fightSlice = createSlice({
           document.querySelector("#healingHero"  + action.payload.id).className = "healinigSpanHero animateHealingHero";
         });
       });
+    
     },
 
     hitMana: (state, action) => {
@@ -156,21 +172,20 @@ export const fightSlice = createSlice({
     },
 
     checkMana: (state, action) => {
-      if (state.players[action.payload.id].mana <= 0) {
-        const queryAll = document.querySelectorAll('#spelljoueur' + action.payload.id)
-        for (var i = 0; i < queryAll.length; ++i) {
-          var item = queryAll[i].classList.add('disabledbutton');
+      state.players.map((key, value) => {
+        if (key.mana < 5) {
+          let allSpell = document.querySelectorAll('#spelljoueur' + value)
+          allSpell.forEach((element) => element.classList.add('disabledbutton'))
+        } 
+        
+        if (key.mana < 30 ) {
+          let queryAll = document.querySelectorAll('#spellSpecialjoueur' + value)
+          queryAll.forEach((element) => {
+            element.classList.add('disabledbutton')
+            element.childNodes[0].classList.remove('pulse')
+        })
         }
-      }
-
-      if (state.players[action.payload.id].mana < 30) {
-        const queryAll = document.querySelectorAll('#spellSpecialjoueur' + action.payload.id)
-        for (var i = 0; i < queryAll.length; ++i) {
-          queryAll[i].childNodes[0].classList.remove('pulse')
-          queryAll[i].classList.add('disabledbutton');
-          
-        }
-      }
+      })
 
     },
 

@@ -33,7 +33,7 @@ const ButtonSpecial = props => {
             type: "fight/hitMonster",
             payload: {
                 hit: 150,
-                mana: 30,
+                mana: 16,
                 id: props.player.id
             }
         })

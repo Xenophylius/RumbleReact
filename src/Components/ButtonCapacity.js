@@ -33,7 +33,6 @@ const ButtonCapacity = props => {
                 id: props.player.id
             }
         })
-
         dispatch({
             type: "fight/checkWin",
         })
@@ -55,6 +54,7 @@ const ButtonCapacity = props => {
                 id: props.player.id,
             }
         })
+
     }, 2000);
 
 
