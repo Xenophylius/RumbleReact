@@ -1,26 +1,27 @@
 import React from 'react';
 
+const ProgressBar = props => {
 
-class ProgressBar extends React.Component {
-    
-    
+    let width = (props.pv * 100 / props.pvMax) + "%"
 
-    render() {
+    if (props.pv <= 0 ) {
+        width = "0%"
+    }
         return (
             <div className="progress md-progress col-8 p-0" >
                 <div className="progress-bar"
-                    style={{ width: (this.props.pv * 100 / this.props.pvMax) + "%" }}
-                    aria-valuenow={this.props.pv}
+                    style={{  width: width }}
+                    aria-valuenow={props.pv}
                     aria-valuemin="0"
-                    aria-valuemax={this.props.pvMax}
-                    role="progressbar" >
-                    <i className={` fas ${this.props.faType} ${this.props.bgType} icon-text`}> {this.props.pv} {this.props.barName} </i>
+                    aria-valuemax={props.pvMax}
+                    role="progressbar" 
+                    id={`health${props.id}`}>
+                    <i className={` fas ${props.faType} ${props.bgType} icon-text`}> {props.pv} {props.barName} </i>
                     
                 </div>
             </div >
         )
     }
 
-}
 
 export default ProgressBar;

@@ -392,7 +392,17 @@ animationHeal
 animation: AnimationHeal 2s ease 1;
 }
 
+.AnimationMana{
+  -webkit-animation: AnimationHeal 2s ease 1;
+  -moz-animation: AnimationHeal 2s ease 1;
+  animation: AnimationMana 2s ease 1;
+}
 
+.animationSpecial{
+  -webkit-animation: AnimationHeal 2s ease 1;
+  -moz-animation: AnimationHeal 2s ease 1;
+  animation: AnimationSpecial 2s ease 1;
+}
 
 @-webkit-keyframes AnimationHeal {
   0%{background: linear-gradient(175deg, #67db67, #ffffff, #67db67, #ffffff, #67db67, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
@@ -406,6 +416,38 @@ animation: AnimationHeal 2s ease 1;
 }
 @keyframes AnimationHeal { 
   0%{background: linear-gradient(175deg, #67db67, #ffffff, #67db67, #ffffff, #67db67, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+
+@-webkit-keyframes AnimationMana {
+  0%{background: linear-gradient(175deg, #4952d4, #ffffff, #4952d4, #ffffff, #4952d4, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+@-moz-keyframes AnimationMana {
+  0%{background: linear-gradient(175deg, #4952d4, #ffffff, #4952d4, #ffffff, #4952d4, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+@keyframes AnimationMana { 
+  0%{background: linear-gradient(175deg, #4952d4, #ffffff, #4952d4, #ffffff, #4952d4, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+
+@-webkit-keyframes AnimationSpecial {
+  0%{background: linear-gradient(175deg, #c8e06f, #ffffff, #c8e06f, #ffffff, #c8e06f, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+@-moz-keyframes AnimationSpecial {
+  0%{background: linear-gradient(175deg, #c8e06f, #ffffff, #c8e06f, #ffffff, #c8e06f, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
+  50%{background-position:54% 100%}
+  100%{background-position:47% 0%}
+}
+@keyframes AnimationSpecial { 
+  0%{background: linear-gradient(175deg, #c8e06f, #ffffff, #c8e06f, #ffffff, #c8e06f, #e0ffe0); background-size: 1200% 1200%; background-position:47% 0%}
   50%{background-position:54% 100%}
   100%{background-position:47% 0%}
 }
@@ -430,6 +472,7 @@ background-color: #f02c0c !important;
 font-weight: bold;
 }
 
+
 .pulse {
 cursor: pointer;
 animation: pulse 1s infinite;
@@ -453,14 +496,17 @@ animation: none;
 0% {
   -moz-box-shadow: 0 0 0 0 rgba(220,20,60, 0.4);
   box-shadow: 0 0 0 0 rgba(220,20,60, 0.4);
+  color: white;
 }
 70% {
     -moz-box-shadow: 0 0 0 0 rgba(220,20,60, 0);
     box-shadow: 0 0 0 30px rgba(220,20,60, 0);
+    color: yellow;
 }
 100% {
     -moz-box-shadow: 0 0 0 0 rgba(220,20,60, 0);
     box-shadow: 0 0 0 0 rgba(220,20,60, 0);
+    color: white;
 }
 }
 /*#### End Bouton COMBO ####*/
@@ -609,6 +655,7 @@ overflow: visible;
 .titleMonster {
   z-index: 20 !important;
   background-color: #232323;
+  
 }
 
 .degatSpanMonster {
@@ -617,10 +664,13 @@ overflow: visible;
   bottom: 10px;
   color: white;
   z-index: 10;
+  font-style: italic;
 }
 
 .animateSpanMonster {
-  background-color: red;
+  color: red;
+  font-weight: bold;
+  font-size: medium;
   animation: degatsUp 3s linear 1;
   animation-fill-mode: forwards
 }
@@ -629,13 +679,15 @@ overflow: visible;
   position: absolute;
   right: 10px;
   bottom: 10px;
-  color: white !important;
+  color: red !important;
   z-index: 10;
-  font-size: smaller;
+  font-style: italic;
 }
 
 .animateSpanHero {
-  background-color: red;
+  color: red;
+  font-weight: bold;
+  font-size: medium;
   animation: degatsUpHero 1.2s linear 1;
   animation-fill-mode: forwards
 }
@@ -644,19 +696,24 @@ overflow: visible;
   position: absolute;
   right: 0px;
   bottom: 10px;
-  color: white !important;
+  color: white;
   z-index: 10;
-  font-size: smaller;
+  font-style: italic;
+  
 }
 
 .animateHealingHero {
-  background-color: green;
+  color: green;
+  font-weight: bold;
+  font-size: medium;
   animation: degatsUpHero 1.2s linear 1;
   animation-fill-mode: forwards
 }
 
 .animateManaHero {
-  background-color: blue;
+  color: blue;
+  font-weight: bold;
+  font-size: medium;
   animation: degatsUpHero 1.2s linear 1;
   animation-fill-mode: forwards
 }

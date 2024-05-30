@@ -32,7 +32,6 @@ const ButtonCapacity = props => {
         dispatch({
             type: "fight/healing",
             payload: {
-                heal: 100,
                 mana: 5,
                 id: props.player.id
             }
@@ -61,8 +60,8 @@ const ButtonCapacity = props => {
     
         return (
             <div className='col-6 mt-2 mb-2' id={`spell${props.id}`}>
-                <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main">
-                    <i className="fas fa-heart me-1"></i> HEALTH
+                <button type="button" onClick={() => combat()} className="btn btn-outline-success material-tooltip-main">
+                    <i className="fas fa-heart me-1"></i> <span className='fw-bold'>HEALTH</span>
                     
                 </button>
             </div>

@@ -34,7 +34,8 @@ const ButtonSpecial = props => {
             payload: {
                 hit: 150,
                 mana: 16,
-                id: props.player.id
+                id: props.player.id,
+                special: true
             }
         })
 
@@ -61,7 +62,7 @@ const ButtonSpecial = props => {
         return (
             <div className='col-6 mt-2 mb-2' id={`spellSpecial${props.id}`}>
                 <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main btn-combo pulse">
-                    <i className="fas fa-bomb me-1"></i> SPECIAL
+                    <i className="fa-solid fa-wand-sparkles me-1" style={{color: 'yellow'}}></i> SPECIAL
                     
                 </button>
             </div>

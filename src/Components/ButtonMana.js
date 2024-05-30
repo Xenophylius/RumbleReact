@@ -8,7 +8,6 @@ const ButtonCapacity = props => {
             type: "fight/countLap",
         })
 
-
         dispatch({
             type: "fight/hitMana",
             payload: {
@@ -56,8 +55,8 @@ const ButtonCapacity = props => {
     
         return (
             <div className='col-6 mt-2 mb-2'>
-                <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main">
-                    <i className="fas fa-fire-alt me-1"></i> MANA
+                <button type="button" onClick={() => combat()} className="btn btn-outline-primary material-tooltip-main">
+                    <i className="fas fa-fire-alt me-1"></i> <span className='fw-bold'>MANA</span>
                     
                 </button>
             </div>
