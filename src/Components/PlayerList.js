@@ -15,7 +15,7 @@ function PlayerList() {
     return (
       <div className='mb-5'>
       <div className="row justify-content-center">
-        <h3 className="text-light fsw-bold border border-2 col-2 text-center">Tour : {countLap}</h3>
+        <h3 className="text-light fsw-bold border border-2 col-4 col-sm-2 text-center" >Tour {countLap}</h3>
       </div>
       <div className='row justify-content-evenly mt-3'>
         

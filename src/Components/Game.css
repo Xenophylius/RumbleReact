@@ -16,6 +16,21 @@
   }
 }
 
+@media (max-width: 698px) { 
+  .degatSpanMonster {
+    right: 100px !important;
+  }
+
+  #shop {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #shopItems {
+    flex-direction: column !important;
+  }
+}
+
 @media (max-width: 572px) { 
   .degatSpanMonster {
     right: 100px !important;
@@ -652,6 +667,27 @@ overflow: visible;
   
 }
 
+#shop {
+  z-index: 30 !important;
+  /* background-color: #232323 !important; */
+}
+
+.bg-first {
+  z-index: 30 !important;
+  background-color: #232323 !important;
+  cursor: pointer;
+}
+
+.bg-first-without-cursor {
+  z-index: 30 !important;
+  background-color: #232323 !important;
+}
+
+.bg-first:hover, .bg-first-without-cursor:hover {
+  color: #ffc107 !important;
+}
+
+
 .titleMonster {
   z-index: 20 !important;
   background-color: #232323;
@@ -743,4 +779,35 @@ overflow: visible;
     .customIndex {
       z-index: 20 !important;
     
+    }
+
+    .AnimationGallions {
+      color: #ecb939;
+      font-weight: bold;
+      animation: gallionsAnimation 2s linear 1;
+      animation-fill-mode: forwards
+    }
+
+    @keyframes gallionsAnimation{
+      0%{
+          color: #ecb939;
+      }
+      20%{
+        color: white;
+      }
+      40%{
+        color: #ecb939;
+      }
+      60%{
+        color: white;
+      }
+      80%{
+        color: #ecb939;
+      }
+      90%{
+        color: white;
+      }
+      100% {
+          color: #232323;
+      }
     }

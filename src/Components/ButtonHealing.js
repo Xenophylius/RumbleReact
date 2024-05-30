@@ -59,7 +59,7 @@ const ButtonCapacity = props => {
     }
     
         return (
-            <div className='col-6 mt-2 mb-2' id={`spell${props.id}`}>
+            <div className='col-12 col-sm-6 mt-2 mb-2' id={`spell${props.id}`}>
                 <button type="button" onClick={() => combat()} className="btn btn-outline-success material-tooltip-main">
                     <i className="fas fa-heart me-1"></i> <span className='fw-bold'>HEALTH</span>
                     

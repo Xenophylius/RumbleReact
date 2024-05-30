@@ -18,7 +18,9 @@ const initialState = {
 
   monster: {name: monster[randomNumber2].name, pv: 1000, pvMax: 1000, image: monster[randomNumber2].image},
 
-  countLap: 0
+  countLap: 0,
+
+  gallions: 0
 };
 
 export const fightSlice = createSlice({
@@ -157,11 +159,6 @@ export const fightSlice = createSlice({
           id = id + 1
         }
       } 
-      // else {
-
-      // while(document.querySelector('#joueur' + id).className.includes('disabledbutton')) {
-      //   id = id + 1
-      // }}
       
       document.querySelector('#disabled' + idNext).classList.add('disabledbutton')
     },
@@ -190,9 +187,20 @@ export const fightSlice = createSlice({
           window.location.reload()
         }
       })
+    }, 
+
+    gallionsUp: (state, action) => {
+      state.gallions = state.gallions + action.payload;
+      toaster("#gallionsAnimate", '', action.payload, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
+      return state
+    },
+
+    gallionsDown: (state, action) => {
+      state.gallions = state.gallions - action.payload;
+      return state
     }
   },
 });
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap } = fightSlice.actions
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown } = fightSlice.actions
 export default fightSlice.reducer;

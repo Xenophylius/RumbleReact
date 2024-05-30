@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { gallionsUp } from '../features/fight/fightSlice';
 
 const ButtonSpecial = props => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const ButtonSpecial = props => {
             }
         })
 
-        
+        dispatch(gallionsUp(10))
 
         dispatch({
             type: "fight/checkMana",
@@ -60,7 +61,7 @@ const ButtonSpecial = props => {
     }
     
         return (
-            <div className='col-6 mt-2 mb-2' id={`spellSpecial${props.id}`}>
+            <div className='col-12 col-sm-6 mt-2 mb-2' id={`spellSpecial${props.id}`}>
                 <button type="button" onClick={() => combat()} className="btn btn-success material-tooltip-main btn-combo pulse">
                     <i className="fa-solid fa-wand-sparkles me-1" style={{color: 'yellow'}}></i> SPECIAL
                     
