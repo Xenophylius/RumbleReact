@@ -7,8 +7,8 @@ function PlayerList() {
   const players = useSelector(state => state.fight.players)
   const countLap = useSelector(state => state.fight.countLap)
   
-  let classOfDiv = "col-12 col-md-6 col-xl-2 card center m-0 p-0 rounded-1"
-  let classOfDivShadow = "col-12 col-md-6 col-xl-2 card center m-0 p-0 card-shadow rounded-1"
+  let classOfDiv = "col-12 col-md-5 col-xl-2 card center m-0 p-0 rounded-1 margeResponsive"
+  let classOfDivShadow = "col-12 col-md-5 col-xl-2 card center m-0 p-0 card-shadow rounded-1 margeResponsive"
   let classButton = "row justify-content-center mt-3"
   let classButtonDisabled = "row justify-content-center mt-3 disabledbutton"
 

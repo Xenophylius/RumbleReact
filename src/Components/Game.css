@@ -14,6 +14,10 @@
   .degatSpanMonster {
     right: -50px !important;
   }
+
+  .margeResponsive {
+    margin-bottom: 2vh !important;
+  }
 }
 
 @media (max-width: 698px) { 
@@ -113,24 +117,31 @@ body {
 .Gryffindor {
   background-color: #ae0001 !important;
   color: white;
-  
+  background-image: url('https://i.gifer.com/R2oi.gif');
+  background-position: right; 
 }
 
 .Ravenclaw {
   background-color: #222f5b !important;
   color: white;
+  background-image: url('https://i.gifer.com/R2og.gif');
+  background-position: right;
 }
 
 .Slytherin {
   background-color: #2a623d !important;
   color: white;
+  background-image: url('https://i.gifer.com/KGZQ.gif');
+  background-position: right;
 }
 
 .Hufflepuff {
   background-color: #ecb939 !important;
   color: white;
-  
+  background-image: url('https://i.gifer.com/MXGi.gif');
+  background-position: right;
 }
+
 
 /*
 -----------------------------
@@ -479,7 +490,10 @@ animation: AnimationHeal 2s ease 1;
   box-shadow: rgb(255, 255, 255) 0px 5px 15px;
   border: 2px solid rgb(255, 255, 255);
   opacity: 1;
+  transform:scale(1.05);
+  
 }
+
 
 /*#### Bouton COMBO ####*/
 .btn-combo {
@@ -758,10 +772,12 @@ overflow: visible;
   0%{
     -webkit-transform: translateY(0);
             transform: translateY(0);
+            opacity: 1;
   }
   100% {
     -webkit-transform: translateY(-250px);
       transform: translateY(-250px);
+      opacity: 0;
   }
   }
 
@@ -769,10 +785,12 @@ overflow: visible;
     0%{
       -webkit-transform: translateY(0);
               transform: translateY(0);
+              opacity: 1;
     }
     100% {
       -webkit-transform: translateY(-156px);
         transform: translateY(-156px);
+        opacity: 0;
     }
     }
 
@@ -781,31 +799,47 @@ overflow: visible;
     
     }
 
+    a {
+      opacity: 0.6 !important;
+    }
+
+    a:hover {
+      color: #ecb939 !important;
+      opacity: 1 !important;
+    }
+
     .AnimationGallions {
       color: #ecb939;
       font-weight: bold;
       animation: gallionsAnimation 2s linear 1;
-      animation-fill-mode: forwards
+      animation-fill-mode: forwards;
+      opacity: 1;
     }
 
     @keyframes gallionsAnimation{
       0%{
           color: #ecb939;
+          opacity: 0.2;
       }
       20%{
         color: white;
+        opacity: 0.5;
       }
       40%{
         color: #ecb939;
+        opacity: 0.8;
       }
       60%{
         color: white;
+        opacity: 1;
       }
       80%{
         color: #ecb939;
+        opacity: 0.6;
       }
       90%{
         color: white;
+        opacity: 0.4;
       }
       100% {
           color: #232323;

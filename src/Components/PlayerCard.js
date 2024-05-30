@@ -20,13 +20,13 @@ const PlayerCard = props => {
     
 
         return ( 
-            <div key={player.id} className={props.cardDiv} id={`joueur${player.id}`}>
+            <div key={player.id} className={`${props.cardDiv}`} id={`joueur${player.id}`}>
 
                 <div className="card-body text-center m-0 p-0 " id={`card${player.id}`}>
                     
                         <div className='boxHit'>
                             <div className='position-relative customIndex'>
-                                <h5 className={player.home}>{player.name}</h5>
+                                <h5 className={`pt-2 pb-2 ${player.home}`}>{player.name}</h5>
                             </div>
 
                         <div className="degatSpanHero" id={`spanHero${player.id}`}></div>
