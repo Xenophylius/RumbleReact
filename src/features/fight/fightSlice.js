@@ -28,6 +28,9 @@ export const fightSlice = createSlice({
   initialState,
   reducers: {
     hitMonster: (state, action) => {
+      if (action.payload.maxima && state.gallions < 150) {
+        return state
+      } else {
       state.monster.pv = state.monster.pv - action.payload.hit
       state.players[action.payload.id].mana = state.players[action.payload.id].mana - action.payload.mana
       
@@ -35,10 +38,14 @@ export const fightSlice = createSlice({
         let id = '#card' +  action.payload.id
         animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationSpecial")
       }
+
       animate("#monster", "img-fluid mb-3 rounded-5", "img-fluid mb-3 rounded-5 animationDegatsCard")
       toaster(".degatSpanMonster", "", action.payload.hit, "-", "degatSpanMonster", "degatSpanMonster animateSpanMonster")
+    
       return state
-    },
+    
+    }}
+    ,
 
     hitBack: (state, action) => {
       let hit = action.payload.hit + Math.floor(Math.random() * 5)
@@ -168,11 +175,15 @@ export const fightSlice = createSlice({
         alert('WIN, NEXT !')
         let randomMonster = Math.floor(Math.random() * 7);
         state.monster = {name: monster[randomMonster].name, pv: 1000, pvMax: 1000, image: monster[randomMonster].image}
+        state.gallions = state.gallions + 100
+        toaster("#gallionsAnimate", '', 100, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
       }
 
       state.players.map((key, value) => {
         if (state.players[value].pv <= 0) {
          document.querySelector('#joueur' + value).classList.add("disabledbutton", "dead")
+         state.players[value].mana = 0
+         document.querySelector('#spellSpecialjoueur' + action.payload).childNodes[0].classList.remove('pulse')
         }
       })
 
@@ -196,11 +207,65 @@ export const fightSlice = createSlice({
     },
 
     gallionsDown: (state, action) => {
+      if(action.payload <= state.gallions) {
       state.gallions = state.gallions - action.payload;
+      toaster("#gallionsAnimate", '', action.payload, '-', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
       return state
+    } else {
+      let galManquant = action.payload - state.gallions
+      toaster("#gallionsAnimate", '', galManquant, '', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal Manquant')
     }
   },
-});
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown } = fightSlice.actions
+  lifeUpAll: (state, action) => {
+    if(action.payload <= state.gallions) {
+      state.players.map((key, value) => {
+        if (state.players[value].pv > 0) {
+          state.players[value].pv = state.players[value].pv + 50
+          let pvGiven = state.players[value].pvMax -  state.players[value].pv
+          if (state.players[value].pv > state.players[value].pvMax) {state.players[value].pv = state.players[value].pvMax}
+          let id = '#card' +  value
+          animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationHeal")
+          toaster("#healingHero", value, pvGiven, "+", "healinigSpanHero", "healinigSpanHero animateHealingHero")
+        }
+        return state
+      })
+      
+    }
+    
+    },
+
+    manaUpAll: (state, action) => {
+      if(action.payload <= state.gallions) {
+        state.players.map((key, value) => {
+          if (state.players[value].pv > 0) {
+            state.players[value].mana = state.players[value].mana + action.payload
+            let manaGiven = state.players[value].manaMax -  state.players[value].mana
+            if (state.players[value].mana > state.players[value].manaMax) {state.players[value].mana = state.players[value].manaMax}
+            let id = '#card' +  value
+            animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationMana")
+            toaster("#manaHero", value, manaGiven, "+", "healinigSpanHero", "healinigSpanHero animateManaHero", ' PM')
+          }
+          return state          
+        })
+        // Check les disabledButton pour mana et activer si mana OK
+        for (let x = 0; i < 3; ++i) {
+        const queryAll = document.querySelectorAll('#spelljoueur' + x)
+        for (let i = 0; i < queryAll.length; ++i) {
+          let item = queryAll[i].classList.remove('disabledbutton');
+        }}
+
+        for (let x = 0; i < 3; ++i) {
+      const queryAll2 = document.querySelectorAll('#spellSpecialjoueur' + x)
+        for (var i = 0; i < queryAll2.length; ++i) {
+          var item = queryAll2[i].classList.remove('disabledbutton');
+          queryAll2[i].childNodes[0].classList.add('pulse')
+        }}
+      }
+    }
+  }
+  },
+);
+
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll } = fightSlice.actions
 export default fightSlice.reducer;

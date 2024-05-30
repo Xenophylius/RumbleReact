@@ -10,12 +10,12 @@ const ButtonCapacity = props => {
         dispatch(hitMonster({hit :50, mana: 5, id: props.player.id}))
         dispatch(disabledButton({id: props.player.id}))
         dispatch(checkMana({id: props.player.id}))
-        dispatch(gallionsUp(5))
+        dispatch(gallionsUp(10))
         
         
         setTimeout(() => {
             dispatch(hitBack({hit: 5, id: props.player.id}))
-            dispatch(checkWin())
+            dispatch(checkWin(props.player.id))
         }, 1000);
 
         setTimeout(() => {

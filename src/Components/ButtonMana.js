@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { gallionsUp } from '../features/fight/fightSlice';
 
 const ButtonCapacity = props => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const ButtonCapacity = props => {
             }
         })
 
+        dispatch(gallionsUp(5))
         
 
         setTimeout(() => {
@@ -37,6 +39,7 @@ const ButtonCapacity = props => {
 
         dispatch({
             type: "fight/checkWin",
+            payload: props.player.id
         }) 
 
     }, 1000);

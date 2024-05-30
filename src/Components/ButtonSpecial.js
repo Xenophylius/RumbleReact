@@ -27,6 +27,7 @@ const ButtonSpecial = props => {
 
         dispatch({
             type: "fight/checkWin",
+            payload: props.player.id
         })
     }, 1000);
 
@@ -40,7 +41,7 @@ const ButtonSpecial = props => {
             }
         })
 
-        dispatch(gallionsUp(10))
+        dispatch(gallionsUp(20))
 
         dispatch({
             type: "fight/checkMana",
