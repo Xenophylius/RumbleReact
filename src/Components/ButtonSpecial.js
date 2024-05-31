@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkMana, checkTurn, checkWin, countLap, disabledButton, gallionsUp, hitBack, hitMonster } from '../features/fight/fightSlice';
 
 const ButtonSpecial = props => {
     const dispatch = useDispatch();
-    let attack = 150
+    const hitBase = useSelector(state => state.fight.hitBase)
+    let attack = hitBase * 3
 
     const combat = () => {
         dispatch(countLap())

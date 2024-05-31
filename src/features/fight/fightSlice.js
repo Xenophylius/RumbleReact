@@ -10,15 +10,16 @@ let randomNumber2 = Math.floor(Math.random() * 13)
 
 const initialState = {
   players: [
-    { name: students[randomNumber1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 0, image: students[randomNumber1].image, home: students[randomNumber1].house },
-    { name: students[randomNumber1 + 1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, image: students[randomNumber1 + 1].image, home: students[randomNumber1 + 1].house  },
-    { name: students[randomNumber1 + 2].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, image: students[randomNumber1 + 2].image, home: students[randomNumber1 +2].house  },
-    { name: students[randomNumber1 + 3].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, image: students[randomNumber1 + 3].image, home: students[randomNumber1 + 3].house  }
+    { name: students[randomNumber1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 0, image: students[randomNumber1].image, home: students[randomNumber1].house},
+    { name: students[randomNumber1 + 1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, image: students[randomNumber1 + 1].image, home: students[randomNumber1 + 1].house },
+    { name: students[randomNumber1 + 2].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, image: students[randomNumber1 + 2].image, home: students[randomNumber1 +2].house },
+    { name: students[randomNumber1 + 3].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, image: students[randomNumber1 + 3].image, home: students[randomNumber1 + 3].house }
   ],
   monster: {name: monster[randomNumber2].name, pv: 1000, pvMax: 1000, image: monster[randomNumber2].image},
   countLap: 0,
   gallions: 0,
-  killMonster: 1
+  killMonster: 1,
+  hitBase: 50
 };
 
 export const fightSlice = createSlice({
@@ -178,11 +179,13 @@ export const fightSlice = createSlice({
     checkWin: (state, action) => {
       if (state.monster.pv <= 0) {
         state.killMonster = state.killMonster + 1
-        alert(`WIN ! Vous êtes désormais niveau ${state.killMonster}. Le professeur devient plus fort. Vous pouvez choisir un pouvoir special afin de vous aider.`)
+        alert(`WIN ! Vous êtes désormais niveau ${state.killMonster}. Le professeur devient plus fort. Vous pouvez choisir un Horcruex afin de vous aider.`)
         let randomMonster = Math.floor(Math.random() * 7);
         state.monster = {name: monster[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: monster[randomMonster].image}
         state.gallions = state.gallions + 100
         toaster("#gallionsAnimate", '', 100, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
+        document.querySelector('#horcruxeDisplay').classList.toggle('d-none')
+        document.querySelector('#shopHorcruxeId').classList.toggle('shopFlask')
       }
 
       state.players.map((key, value) => {
@@ -229,9 +232,9 @@ export const fightSlice = createSlice({
       let galManquant = action.payload - state.gallions
       toaster("#gallionsAnimate", '', galManquant, '', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal Manquant')
     }
-  },
+    },
 
-  lifeUpAll: (state, action) => {
+    lifeUpAll: (state, action) => {
     if(action.payload <= state.gallions) {
       state.players.map((key, value) => {
         if (state.players[value].pv > 0) {
@@ -276,10 +279,42 @@ export const fightSlice = createSlice({
           queryAll2[i].childNodes[0].classList.add('pulse')
         }}
       }
+    },
+
+    doubleLife: (state, action) => {
+        state.players.map((key, value) => {
+          state.players[value].pvMax = state.players[value].pvMax * 2
+          return state
+        })
+    },
+
+    doubleMana: (state, action) => {
+      state.players.map((key, value) => {
+        state.players[value].manaMax = state.players[value].manaMax * 2
+        return state
+      })
+    },
+
+    doubleMaxima: (state, action) => {
+      state.hitBase = state.hitBase * 2
+        return state
+    },
+    
+    animateHorcruxe: (state, action) => {
+      state.players.map((key, value) => {
+        let id = '#card' +  value
+        animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationSpecial")
+      })
+      return state
+    },
+
+    displayNone: (state, action) => {
+      document.querySelector(action.payload).classList.toggle('d-none')
+      document.querySelector('#shopHorcruxeId').classList.toggle('shopFlask')
     }
   }
   },
 );
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll } = fightSlice.actions
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone} = fightSlice.actions
 export default fightSlice.reducer;
