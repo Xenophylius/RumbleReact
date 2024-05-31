@@ -9,14 +9,14 @@ const ProgressBar = props => {
     }
         return (
             <div className="progress md-progress col-8 p-0" >
-                <div className="progress-bar"
+                <div className={`progress-bar ${props.bgType}`}
                     style={{  width: width }}
                     aria-valuenow={props.pv}
                     aria-valuemin="0"
                     aria-valuemax={props.pvMax}
                     role="progressbar" 
                     id={`health${props.id}`}>
-                    <i className={` fas ${props.faType} ${props.bgType} icon-text`}> {props.pv} {props.barName} </i>
+                    <span className='fst-italic'>{props.pv}/{props.pvMax}</span>
                     
                 </div>
             </div >

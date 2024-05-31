@@ -37,8 +37,8 @@ const PlayerCard = props => {
                         <img src={imagePlayer} className='img-fluid mb-2 rounded-5' />
                     </div>
                     <div className='row justify-content-center'>
-                        <ProgressBar id={player.id} pv={player.pv} pvMax={player.pvMax} faType='fa-heart' barName=' : pv ' bgType='bg-danger' />
-                        <ProgressBar id={player.id} pv={player.mana} pvMax={player.manaMax} faType='fa-fire-alt' barName=' : mana ' />
+                        <ProgressBar id={player.id} pv={player.pv} pvMax={player.pvMax} faType='fa-heart' barName=' PV ' bgType='bg-danger' />
+                        <ProgressBar id={player.id} pv={player.mana} pvMax={player.manaMax} faType='fa-fire-alt' barName=' PM ' />
                     </div>
                     <span className="badge badge-danger ml-2 " id="degatSpanJ1"></span>
                     <div className={props.classButton} id={`disabled${player.id}`}>

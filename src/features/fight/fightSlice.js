@@ -15,12 +15,10 @@ const initialState = {
     { name: students[randomNumber1 + 2].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, image: students[randomNumber1 + 2].image, home: students[randomNumber1 +2].house  },
     { name: students[randomNumber1 + 3].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, image: students[randomNumber1 + 3].image, home: students[randomNumber1 + 3].house  }
   ],
-
   monster: {name: monster[randomNumber2].name, pv: 1000, pvMax: 1000, image: monster[randomNumber2].image},
-
   countLap: 0,
-
-  gallions: 0
+  gallions: 0,
+  killMonster: 1
 };
 
 export const fightSlice = createSlice({
@@ -44,11 +42,10 @@ export const fightSlice = createSlice({
     
       return state
     
-    }}
-    ,
+    }},
 
     hitBack: (state, action) => {
-      let hit = action.payload.hit + Math.floor(Math.random() * 5)
+      let hit = (action.payload.hit + Math.floor(Math.random() * 5)) * state.killMonster
       if (state.countLap % 4 === 0) {
         for (let i = 0; i < 4; i++) {
           if (state.players[i].pv > 0) {
@@ -80,20 +77,27 @@ export const fightSlice = createSlice({
       let manaGiven = state.players[action.payload.id].manaMax - state.players[action.payload.id].mana
       state.players[action.payload.id].mana = state.players[action.payload.id].manaMax
       state.players[action.payload.id].pv = state.players[action.payload.id].pv - action.payload.hit
+
+      toaster("#spanHero", action.payload.id, action.payload.hit, '-', "degatSpanHero", "degatSpanHero animateSpanHero")
+      animate("#card" + action.payload.id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")  
+
       const queryAll = document.querySelectorAll('#spelljoueur' + action.payload.id)
-        for (var i = 0; i < queryAll.length; ++i) {
-          var item = queryAll[i].classList.remove('disabledbutton');
+        for (let i = 0; i < queryAll.length; ++i) {
+          queryAll[i].classList.remove('disabledbutton');
         }
 
       const queryAll2 = document.querySelectorAll('#spellSpecialjoueur' + action.payload.id)
-        for (var i = 0; i < queryAll2.length; ++i) {
-          var item = queryAll2[i].classList.remove('disabledbutton');
+        for (let i = 0; i < queryAll2.length; ++i) {
+          queryAll2[i].classList.remove('disabledbutton');
           queryAll2[i].childNodes[0].classList.add('pulse')
         }
 
-      let id = '#card' +  action.payload.id
-      animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationMana")
-      toaster("#manaHero", action.payload.id, manaGiven, "+", "healinigSpanHero", "healinigSpanHero animateManaHero", ' PM')
+        setTimeout(() => {
+          let id = '#card' +  action.payload.id
+          animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationMana")
+          toaster("#manaHero", action.payload.id, manaGiven, "+", "healinigSpanHero", "healinigSpanHero animateManaHero", ' PM')
+      }, 200);
+      
       return state
     },
 
@@ -111,6 +115,7 @@ export const fightSlice = createSlice({
             element.childNodes[0].classList.remove('pulse')
         })
         }
+        return true
       })
 
     },
@@ -172,9 +177,10 @@ export const fightSlice = createSlice({
 
     checkWin: (state, action) => {
       if (state.monster.pv <= 0) {
-        alert('WIN, NEXT !')
+        state.killMonster = state.killMonster + 1
+        alert(`WIN ! Vous êtes désormais niveau ${state.killMonster}. Le professeur devient plus fort. Vous pouvez choisir un pouvoir special afin de vous aider.`)
         let randomMonster = Math.floor(Math.random() * 7);
-        state.monster = {name: monster[randomMonster].name, pv: 1000, pvMax: 1000, image: monster[randomMonster].image}
+        state.monster = {name: monster[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: monster[randomMonster].image}
         state.gallions = state.gallions + 100
         toaster("#gallionsAnimate", '', 100, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
       }
@@ -185,6 +191,7 @@ export const fightSlice = createSlice({
          state.players[value].mana = 0
          document.querySelector('#spellSpecialjoueur' + action.payload).childNodes[0].classList.remove('pulse')
         }
+        return true
       })
 
       let countPlayer = 0
@@ -197,12 +204,16 @@ export const fightSlice = createSlice({
           alert('GAME OVER, you make ' + state.countLap + ' turns.')
           window.location.reload()
         }
+        return true
       })
     }, 
 
     gallionsUp: (state, action) => {
       state.gallions = state.gallions + action.payload;
       toaster("#gallionsAnimate", '', action.payload, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
+      if (state.gallions >= 50) {
+        document.querySelector('#shopFlaskId').setAttribute('class', 'svg-inline--fa fa-flask fa-2xl text-warning shopFlask')
+      }
       return state
     },
 
@@ -210,6 +221,9 @@ export const fightSlice = createSlice({
       if(action.payload <= state.gallions) {
       state.gallions = state.gallions - action.payload;
       toaster("#gallionsAnimate", '', action.payload, '-', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
+      if (state.gallions < 50) {
+        document.querySelector('#shopFlaskId').setAttribute('class', 'svg-inline--fa fa-flask fa-2xl text-warning')
+      }
       return state
     } else {
       let galManquant = action.payload - state.gallions
@@ -249,16 +263,16 @@ export const fightSlice = createSlice({
           return state          
         })
         // Check les disabledButton pour mana et activer si mana OK
-        for (let x = 0; i < 3; ++i) {
+        for (let x = 0; x < 3; ++x) {
         const queryAll = document.querySelectorAll('#spelljoueur' + x)
         for (let i = 0; i < queryAll.length; ++i) {
-          let item = queryAll[i].classList.remove('disabledbutton');
+          queryAll[i].classList.remove('disabledbutton');
         }}
 
-        for (let x = 0; i < 3; ++i) {
+        for (let x = 0; x < 3; ++x) {
       const queryAll2 = document.querySelectorAll('#spellSpecialjoueur' + x)
-        for (var i = 0; i < queryAll2.length; ++i) {
-          var item = queryAll2[i].classList.remove('disabledbutton');
+        for (let i = 0; i < queryAll2.length; ++i) {
+          queryAll2[i].classList.remove('disabledbutton');
           queryAll2[i].childNodes[0].classList.add('pulse')
         }}
       }

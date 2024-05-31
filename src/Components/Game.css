@@ -27,6 +27,7 @@
 
   #shop {
     margin: 0 !important;
+    margin-top: 2vh !important;
     padding: 0 !important;
   }
 
@@ -71,6 +72,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.shopButton{
+  opacity: 0.6 !important;
+}
+
+.shopButton:hover {
+  color: #ecb939 !important;
+  opacity: 1 !important;
 }
 
 .fa-fire-alt{
@@ -142,7 +152,30 @@ body {
   background-position: right;
 }
 
+.shopFlask {
+  animation: moneyTime linear 1s infinite !important;
+}
 
+.shopFlask:hover {
+  animation: none;
+}
+
+@keyframes moneyTime{
+  0% {
+    transform: scale(1.15);
+    opacity: 0 !important;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1 !important;
+    color: whitesmoke !important;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0 !important;
+
+  }
+}
 /*
 -----------------------------
 Animation degats 
@@ -491,9 +524,8 @@ animation: AnimationHeal 2s ease 1;
   border: 2px solid rgb(255, 255, 255);
   opacity: 1;
   transform:scale(1.05);
-  
+  transform: translateY(-15px);
 }
-
 
 /*#### Bouton COMBO ####*/
 .btn-combo {
@@ -549,7 +581,7 @@ display: block;
 .progress-bar {
 display: -ms-flexbox;
 display: flex;
-
+flex-direction: column;
 
 -ms-flex-pack: center;
 justify-content: center;
@@ -705,8 +737,11 @@ overflow: visible;
 .titleMonster {
   z-index: 20 !important;
   background-color: #232323;
+  background-image: url('https://images6.alphacoders.com/853/thumb-1920-853375.png');
+  background-position: 50% 5%;
   
 }
+
 
 .degatSpanMonster {
   position: absolute;
@@ -799,14 +834,7 @@ overflow: visible;
     
     }
 
-    a {
-      opacity: 0.6 !important;
-    }
-
-    a:hover {
-      color: #ecb939 !important;
-      opacity: 1 !important;
-    }
+    
 
     .AnimationGallions {
       color: #ecb939;
@@ -842,6 +870,6 @@ overflow: visible;
         opacity: 0.4;
       }
       100% {
-          color: #232323;
+          opacity: 0;
       }
     }
