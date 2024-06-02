@@ -6,6 +6,9 @@ const ButtonCapacity = props => {
 
     const dispatch = useDispatch();
     const hitBase = useSelector(state => state.fight.hitBase)
+    const nameMonster = useSelector(state => state.fight.monster.name)
+    const namePlayer = useSelector(state => state.fight.players[props.player.id].name)
+
 
     const combat = () => {
         dispatch(countLap())
@@ -13,8 +16,12 @@ const ButtonCapacity = props => {
         dispatch(disabledButton({id: props.player.id}))
         dispatch(checkMana({id: props.player.id}))
         dispatch(gallionsUp(10))  
+        // let message = namePlayer + ' inflige ' + hitBase + ' points de dégats à ' + nameMonster
+        // dispatch(arrayHistoric(message))
             setTimeout(() => {
                 dispatch(hitBack({hit: 5, id: props.player.id}))
+                    // let messageHitBack = nameMonster + ' inflige ' + 5 + ' points de dégats à ' + namePlayer
+                    // dispatch(arrayHistoric(messageHitBack))
                 dispatch(checkWin(props.player.id))
             }, 1000);
                 setTimeout(() => {

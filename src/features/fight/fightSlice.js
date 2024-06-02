@@ -3,6 +3,8 @@ import monster from "./json/monster.json";
 import students from "./json/students.json";
 import toaster from "./functions/toaster";
 import animate from "./functions/animate";
+import Historic from "../../Components/Historic";
+import { useDispatch } from "react-redux";
 
 let randomNumber1 = Math.floor(Math.random() * 7)
 let randomNumber2 = Math.floor(Math.random() * 13)
@@ -19,7 +21,8 @@ const initialState = {
   countLap: 0,
   gallions: 0,
   killMonster: 1,
-  hitBase: 50
+  hitBase: 50,
+  historic: ['Bienvenue au club de duel']
 };
 
 export const fightSlice = createSlice({
@@ -33,6 +36,11 @@ export const fightSlice = createSlice({
       state.monster.pv = state.monster.pv - action.payload.hit
       state.players[action.payload.id].mana = state.players[action.payload.id].mana - action.payload.mana
       
+      if (action.payload.maxima) {
+        let message = 'Vous utilisez une potion Maxima, vous infligez ' + action.payload.hit + ' points de dégats.'
+        state.historic.push(message)
+      }
+
       if (action.payload.special) {
         let id = '#card' +  action.payload.id
         animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationSpecial")
@@ -40,7 +48,10 @@ export const fightSlice = createSlice({
 
       animate("#monster", "img-fluid mb-3 rounded-5", "img-fluid mb-3 rounded-5 animationDegatsCard")
       toaster(".degatSpanMonster", "", action.payload.hit, "-", "degatSpanMonster", "degatSpanMonster animateSpanMonster")
-    
+      if (!action.payload.maxima) {
+        let message = state.players[action.payload.id].name + ' inflige ' + action.payload.hit + ' points de dégats à ' + state.monster.name
+        state.historic.push(message)
+      }
       return state
     
     }},
@@ -51,14 +62,18 @@ export const fightSlice = createSlice({
         for (let i = 0; i < 4; i++) {
           if (state.players[i].pv > 0) {
             state.players[i].pv = state.players[i].pv - (hit * 3)
-            toaster("#spanHero", i, hit * 4, "-", "degatSpanHero", "degatSpanHero animateSpanHero")
+            toaster("#spanHero", i, hit * 3, "-", "degatSpanHero", "degatSpanHero animateSpanHero")
             animate("#card" + i,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")
           }
-        }
+        } let message = state.monster.name + ' inflige ' + (hit * 3) + ' points de dégats à tous les élèves.'
+        state.historic.push(message)
       } else {
       state.players[action.payload.id].pv = state.players[action.payload.id].pv - hit
       toaster("#spanHero", action.payload.id, hit, '-', "degatSpanHero", "degatSpanHero animateSpanHero")
-      animate("#card" + action.payload.id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")  
+      animate("#card" + action.payload.id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")
+      let message = state.monster.name + ' inflige ' + hit + ' points de dégats à ' + state.players[action.payload.id].name
+      state.historic.push(message)
+       
       }
       return state
     },
@@ -71,6 +86,8 @@ export const fightSlice = createSlice({
       let id = '#card' +  action.payload.id
       animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationHeal")
       toaster("#healingHero", action.payload.id, pvGiven, "+", "healinigSpanHero", "healinigSpanHero animateHealingHero")
+      let message = state.players[action.payload.id].name + ' se soigne de ' + pvGiven + ' points de vies.'
+      state.historic.push(message)
       return state
     },
 
@@ -81,6 +98,8 @@ export const fightSlice = createSlice({
 
       toaster("#spanHero", action.payload.id, action.payload.hit, '-', "degatSpanHero", "degatSpanHero animateSpanHero")
       animate("#card" + action.payload.id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")  
+      let message = state.players[action.payload.id].name + ' récupère ' + action.payload.hit + ' points de mana.'
+      state.historic.push(message)
 
       const queryAll = document.querySelectorAll('#spelljoueur' + action.payload.id)
         for (let i = 0; i < queryAll.length; ++i) {
@@ -186,6 +205,7 @@ export const fightSlice = createSlice({
         toaster("#gallionsAnimate", '', 100, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
         document.querySelector('#horcruxeDisplay').classList.toggle('d-none')
         document.querySelector('#shopHorcruxeId').classList.toggle('shopFlask')
+        state.historic = ['Round ' + state.killMonster]
       }
 
       state.players.map((key, value) => {
@@ -193,6 +213,8 @@ export const fightSlice = createSlice({
          document.querySelector('#joueur' + value).classList.add("disabledbutton", "dead")
          state.players[value].mana = 0
          document.querySelector('#spellSpecialjoueur' + action.payload).childNodes[0].classList.remove('pulse')
+         let message = state.players[value].name + 'n\'a plus de points de vies.'
+         state.historic.push(message)
         }
         return true
       })
@@ -245,9 +267,10 @@ export const fightSlice = createSlice({
           animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationHeal")
           toaster("#healingHero", value, pvGiven, "+", "healinigSpanHero", "healinigSpanHero animateHealingHero")
         }
-        return state
       })
-      
+      let message = 'Vous utilisez une potion Wiggenweld, vos élèves récupérent 50 points de vies.'
+      state.historic.push(message)
+      return state
     }
     
     },
@@ -262,9 +285,11 @@ export const fightSlice = createSlice({
             let id = '#card' +  value
             animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationMana")
             toaster("#manaHero", value, manaGiven, "+", "healinigSpanHero", "healinigSpanHero animateManaHero", ' PM')
-          }
-          return state          
+          }        
         })
+        let message = 'Vous utilisez une potion de Concentration, vos élèves récupérent leur mana.'
+        state.historic.push(message)
+        return state
         // Check les disabledButton pour mana et activer si mana OK
         for (let x = 0; x < 3; ++x) {
         const queryAll = document.querySelectorAll('#spelljoueur' + x)
@@ -284,6 +309,8 @@ export const fightSlice = createSlice({
     doubleLife: (state, action) => {
         state.players.map((key, value) => {
           state.players[value].pvMax = state.players[value].pvMax * 2
+          let message = 'Vous avez sélectionné le Médaillon de Serpentard. Vos points de vies sont doublés et les élèves sont soignés.'
+          state.historic.push(message)
           return state
         })
     },
@@ -291,12 +318,16 @@ export const fightSlice = createSlice({
     doubleMana: (state, action) => {
       state.players.map((key, value) => {
         state.players[value].manaMax = state.players[value].manaMax * 2
+        let message = 'Vous avez sélectionné la Coupe de Poufsouffle. Vos points de mana sont doublés.'
+        state.historic.push(message)
         return state
       })
     },
 
     doubleMaxima: (state, action) => {
-      state.hitBase = state.hitBase * 2
+        state.hitBase = state.hitBase * 2
+        let message = 'Vous avez sélectionné la Bague de Gaunt. Vos dégats sont doublés.'
+        state.historic.push(message)
         return state
     },
     
@@ -311,10 +342,14 @@ export const fightSlice = createSlice({
     displayNone: (state, action) => {
       document.querySelector(action.payload).classList.toggle('d-none')
       document.querySelector('#shopHorcruxeId').classList.toggle('shopFlask')
+    },
+
+    displayToggleDiv: (state, action) => {
+      document.querySelector(action.payload).classList.toggle('d-none')      
     }
   }
   },
 );
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone} = fightSlice.actions
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone, displayToggleDiv} = fightSlice.actions
 export default fightSlice.reducer;

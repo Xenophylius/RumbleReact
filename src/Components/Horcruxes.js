@@ -21,14 +21,6 @@ const horcruxeLife = () => {
 const horcruxeMana = () => {
     dispatch(displayNone('#horcruxeDisplay'))
     dispatch(doubleMana())
-    dispatch(hitMana({ hit: 0, mana: manaMax, id: 0}))
-    dispatch(disabledButton({id: 0}))
-    dispatch(hitMana({ hit: 0, mana: manaMax, id: 1}))
-    dispatch(disabledButton({id: 1}))
-    dispatch(hitMana({ hit: 0, mana: manaMax, id: 2}))
-    dispatch(disabledButton({id: 2}))
-    dispatch(hitMana({ hit: 0, mana: manaMax, id: 3}))
-    dispatch(disabledButton({id: 3}))
 }
 
 const horcruxeMaxima = () => {
@@ -48,11 +40,10 @@ const horcruxeMaxima = () => {
                 </button>
                     <ul className="dropdown-menu text-light bg-first border border-light d-none" id="horcruxeDisplay">
                         <li className="dropdown-item text-light horcruxeItems" onClick={() => horcruxeLife()} title={`Double vos points de vie maximum et vous soigne`}><img className='me-2 horcruxesImg' src='./images/colierHorcruxe.png' alt="Médaillon de Salazar Serpentard"/>Médaillon de Serpentard</li>
-                        <li className="dropdown-item text-light horcruxeItems" onClick={() => horcruxeMana()} title={`Double votre mana maximum et vous rend votre mana`}><img className='me-2 horcruxesImg' src='./images/coupeHorcruxe.png' alt="Coupe de Poufsouffle"/>Coupe de Poufsouffle</li>
+                        <li className="dropdown-item text-light horcruxeItems" onClick={() => horcruxeMana()} title={`Double votre mana maximum`}><img className='me-2 horcruxesImg' src='./images/coupeHorcruxe.png' alt="Coupe de Poufsouffle"/>Coupe de Poufsouffle</li>
                         <li className="dropdown-item text-light horcruxeItems" onClick={() => horcruxeMaxima()} title={`Double vos dégâts`}><img className='me-2 horcruxesImg' src='./images/anneauxHorcruxe.png' alt="Bague de Gaunt"/>Bague de Gaunt</li>
-                    </ul>
-                    
-                <h2 className='ms-3 mt-1'>{level}</h2>   
+                    </ul>                    
+                <h2 className='ms-3 mt-1 color-magic fw-bold'>{level}</h2>   
             </li>
             
         </ul>

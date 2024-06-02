@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  max-height: 100vh;
+  max-height: auto;
   overflow: hidden;
 
 }
@@ -23,6 +23,10 @@
 @media (max-width: 698px) { 
   .degatSpanMonster {
     right: 100px !important;
+  }
+
+  .color-magic {
+    margin-left: 0 !important;
   }
 
   #shop {
@@ -88,6 +92,9 @@
   opacity: 0.6 !important;
 }
 
+.color-magic {
+  color: #94acf1 !important;
+}
 
 .horcruxeButton:hover {
   color: #7F99E8 !important;

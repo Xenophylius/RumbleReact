@@ -4,6 +4,7 @@ import Monster from './Monster';
 import PlayerList from './PlayerList';
 import Shop from './Shop';
 import Horcruxes from './Horcruxes';
+import Historic from './Historic';
 
 
 const App = () => (
@@ -15,6 +16,7 @@ const App = () => (
       <section className="container-fluid">
           <PlayerList />
       </section>
+      <Historic />
   </div>
 )
 
