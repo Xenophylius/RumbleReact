@@ -5,6 +5,7 @@ import PlayerList from './PlayerList';
 import Shop from './Shop';
 import Horcruxes from './Horcruxes';
 import Historic from './Historic';
+import SelectUnivers from './SelectUnivers';
 
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
           <PlayerList />
       </section>
       <Historic />
+      <SelectUnivers />
   </div>
 )
 

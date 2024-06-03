@@ -1,23 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import monster from "./json/monster.json";
 import students from "./json/students.json";
+import got from "./json/got.json";
+import disney from "./json/disney.json";
+import marvel from "./json/marvel.json";
 import toaster from "./functions/toaster";
 import animate from "./functions/animate";
-import Historic from "../../Components/Historic";
 import { useDispatch } from "react-redux";
 
 let randomNumber1 = Math.floor(Math.random() * 7)
 let randomNumber2 = Math.floor(Math.random() * 13)
 
-
 const initialState = {
   players: [
-    { name: students[randomNumber1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 0, image: students[randomNumber1].image, home: students[randomNumber1].house},
-    { name: students[randomNumber1 + 1].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, image: students[randomNumber1 + 1].image, home: students[randomNumber1 + 1].house },
-    { name: students[randomNumber1 + 2].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, image: students[randomNumber1 + 2].image, home: students[randomNumber1 +2].house },
-    { name: students[randomNumber1 + 3].name, pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, image: students[randomNumber1 + 3].image, home: students[randomNumber1 + 3].house }
+    { name: '', pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 0, image: '', home: students[randomNumber1].house},
+    { name: '', pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1, image: '', home: students[randomNumber1 + 1].house },
+    { name: '', pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2, image: '', home: students[randomNumber1 +2].house },
+    { name: '', pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3, image: '', home: students[randomNumber1 + 3].house }
   ],
-  monster: {name: monster[randomNumber2].name, pv: 1000, pvMax: 1000, image: monster[randomNumber2].image},
+  monster: {name: 'Fight Heros', pv: 1000, pvMax: 1000, image: ''},
   countLap: 0,
   gallions: 0,
   killMonster: 1,
@@ -73,7 +74,6 @@ export const fightSlice = createSlice({
       animate("#card" + action.payload.id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationDegatsCard")
       let message = state.monster.name + ' inflige ' + hit + ' points de dégats à ' + state.players[action.payload.id].name
       state.historic.push(message)
-       
       }
       return state
     },
@@ -289,7 +289,6 @@ export const fightSlice = createSlice({
         })
         let message = 'Vous utilisez une potion de Concentration, vos élèves récupérent leur mana.'
         state.historic.push(message)
-        return state
         // Check les disabledButton pour mana et activer si mana OK
         for (let x = 0; x < 3; ++x) {
         const queryAll = document.querySelectorAll('#spelljoueur' + x)
@@ -303,7 +302,7 @@ export const fightSlice = createSlice({
           queryAll2[i].classList.remove('disabledbutton');
           queryAll2[i].childNodes[0].classList.add('pulse')
         }}
-      }
+      } return state
     },
 
     doubleLife: (state, action) => {
@@ -346,10 +345,78 @@ export const fightSlice = createSlice({
 
     displayToggleDiv: (state, action) => {
       document.querySelector(action.payload).classList.toggle('d-none')      
-    }
+    },
+
+    displayToggleDivAll: (state, action) => {
+      const queryAll = document.querySelectorAll(action.payload)
+        for (let i = 0; i < queryAll.length; ++i) {
+          queryAll[i].classList.remove('d-none');
+        }    
+    },
+
+    changeForGot: (state, action) => {
+      let randomMonster = Math.floor(Math.random() * 48)
+      state.monster.name = got[randomMonster].fullName
+      state.monster.image = got[randomMonster].imageUrl
+
+      let i = 1
+      state.players.forEach(element => {
+        element.name = got[randomMonster + i].fullName
+        element.image = got[randomMonster + i].imageUrl
+        i++
+      });
+      return state
+    },
+
+    changeForDisney: (state, action) => {
+      let randomMonster = Math.floor(Math.random() * 45)
+      state.monster.name = disney[randomMonster].name
+      state.monster.image = disney[randomMonster].imageUrl
+
+      let i = 1
+      state.players.forEach(element => {
+        element.name = disney[randomMonster + i].name
+        if (!disney[randomMonster + i].imageUrl) { 
+          element.image = '../../images/disney2.png'
+         } else {
+        element.image = disney[randomMonster + i].imageUrl
+         }
+        i++
+      });
+      return state
+    },
+
+    changeForMarvel: (state, action) => {
+      let randomMonster = Math.floor(Math.random() * 23)
+      state.monster.name = marvel[randomMonster].name
+      state.monster.image = marvel[randomMonster].thumbnail.path + '.' + marvel[randomMonster].thumbnail.extension
+
+      let i = 1
+      state.players.forEach(element => {
+        element.name = marvel[randomMonster + i].name
+        element.image = marvel[randomMonster + i].thumbnail.path + '.' + marvel[randomMonster + i].thumbnail.extension
+        i++
+      });
+      return state
+    },
+
+    changeForHogwarts: (state, action) => {
+      
+
+      state.monster.name = monster[randomNumber2].name
+      state.monster.image = monster[randomNumber2].image
+
+      let i = 0
+      state.players.forEach(element => {
+        element.name = students[randomNumber1 + i].name
+        element.image = students[randomNumber1 + i].image
+        i++
+      });
+      return state
+    },
   }
   },
 );
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone, displayToggleDiv} = fightSlice.actions
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone, displayToggleDiv, addHorcruxeApply, displayToggleDivAll, changeForGot, changeForDisney, changeForMarvel, changeForHogwarts} = fightSlice.actions
 export default fightSlice.reducer;

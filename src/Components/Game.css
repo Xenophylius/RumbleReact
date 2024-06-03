@@ -637,6 +637,10 @@ font-family: 'Yusei Magic', sans-serif;
 
 }
 
+.modalIndex {
+  z-index: 60 !important;
+}
+
 /* img {
 max-width: 30%;
 height: 250px;
@@ -646,6 +650,17 @@ display: block;
 .img-fluid {
   max-height: 150px !important;
   min-height: 150px !important;
+  max-width: 80% !important;
+}
+
+.logoUnivers {
+  height: 200px !important;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.logoUnivers:hover {
+  opacity: 1;
 }
 
 h3 {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin } from '../features/fight/fightSlice';
+import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin, disabledButton, checkMana } from '../features/fight/fightSlice';
 
 
 function Shop() {

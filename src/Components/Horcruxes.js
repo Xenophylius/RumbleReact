@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, healing, hitMana, disabledButton, displayNone } from '../features/fight/fightSlice';
+import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, healing, hitMana, disabledButton, displayNone, addHorcruxeApply, displayToggleDivAll } from '../features/fight/fightSlice';
 
 
 function Horcruxes() {
 
 const level = useSelector(state => state.fight.killMonster)
-const manaMax = useSelector(state => state.fight.players[0].manaMax)
 
 const dispatch = useDispatch();
 const horcruxeLife = () => {
@@ -16,17 +15,21 @@ const horcruxeLife = () => {
     dispatch(healing({mana: 0, id: 1}))
     dispatch(healing({mana: 0, id: 2}))
     dispatch(healing({mana: 0, id: 3}))
+    dispatch(displayToggleDivAll('#horcruxeLife'))
 }
 
 const horcruxeMana = () => {
     dispatch(displayNone('#horcruxeDisplay'))
     dispatch(doubleMana())
+    dispatch(displayToggleDivAll('#horcruxeMana'))
 }
 
 const horcruxeMaxima = () => {
     dispatch(displayNone('#horcruxeDisplay'))
     dispatch(doubleMaxima())
     dispatch(animateHorcruxe())
+    dispatch(displayToggleDivAll('#horcruxeMaxima'))
+
 }
 
   return (
@@ -44,8 +47,8 @@ const horcruxeMaxima = () => {
                         <li className="dropdown-item text-light horcruxeItems" onClick={() => horcruxeMaxima()} title={`Double vos dégâts`}><img className='me-2 horcruxesImg' src='./images/anneauxHorcruxe.png' alt="Bague de Gaunt"/>Bague de Gaunt</li>
                     </ul>                    
                 <h2 className='ms-3 mt-1 color-magic fw-bold'>{level}</h2>   
+                 
             </li>
-            
         </ul>
                     
         </div>

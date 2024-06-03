@@ -32,7 +32,13 @@ const PlayerCard = props => {
                         <div className="degatSpanHero" id={`spanHero${player.id}`}></div>
                         <div className="healinigSpanHero" id={`healingHero${player.id}`}></div>
                         <div className="healinigSpanHero" id={`manaHero${player.id}`}></div>
+                        <div className='horcruxeApply position-absolute start-0 '>
+                            <img className='me-2 horcruxesImg d-none' src='./images/colierHorcruxe.png' alt="Médaillon de Salazar Serpentard" title='Médaillon de serpentard (Vie doublée)' id='horcruxeLife'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src='./images/coupeHorcruxe.png' alt="Coupe de Poufsouffle" title='Coupe de Poufsouffle (Mana doublée)' id='horcruxeMana'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src='./images/anneauxHorcruxe.png' alt="Bague de Gaunt" title='Bague de Gaunt (Dégâts doublés)' id='horcruxeMaxima'/>
 
+                        
+                        </div>
                         
                         <img src={imagePlayer} className='img-fluid mb-2 rounded-5' />
                     </div>
