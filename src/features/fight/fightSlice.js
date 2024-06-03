@@ -7,6 +7,7 @@ import marvel from "./json/marvel.json";
 import toaster from "./functions/toaster";
 import animate from "./functions/animate";
 import { useDispatch } from "react-redux";
+import ModalVictory from "../../Components/ModalVictory";
 
 let randomNumber1 = Math.floor(Math.random() * 7)
 let randomNumber2 = Math.floor(Math.random() * 13)
@@ -23,7 +24,8 @@ const initialState = {
   gallions: 0,
   killMonster: 1,
   hitBase: 50,
-  historic: ['Bienvenue au club de duel']
+  historic: ['Bienvenue au club de duel'],
+  victory: false
 };
 
 export const fightSlice = createSlice({
@@ -198,7 +200,7 @@ export const fightSlice = createSlice({
     checkWin: (state, action) => {
       if (state.monster.pv <= 0) {
         state.killMonster = state.killMonster + 1
-        alert(`WIN ! Vous êtes désormais niveau ${state.killMonster}. Le professeur devient plus fort. Vous pouvez choisir un Horcruex afin de vous aider.`)
+        state.victory = true
         let randomMonster = Math.floor(Math.random() * 7);
         state.monster = {name: monster[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: monster[randomMonster].image}
         state.gallions = state.gallions + 100
@@ -414,9 +416,13 @@ export const fightSlice = createSlice({
       });
       return state
     },
+
+    openModal2: (state, action) => {
+      state.victory = action.payload     
+    }
   }
   },
 );
 
-export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone, displayToggleDiv, addHorcruxeApply, displayToggleDivAll, changeForGot, changeForDisney, changeForMarvel, changeForHogwarts} = fightSlice.actions
+export const { hitMonster, hitBack, hitMana, healing, checkMana, checkTurn, checkWin, disabledButton, countLap, gallionsUp, gallionsDown, lifeUpAll, manaUpAll, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, displayNone, displayToggleDiv, addHorcruxeApply, displayToggleDivAll, changeForGot, changeForDisney, changeForMarvel, changeForHogwarts, openModal2} = fightSlice.actions
 export default fightSlice.reducer;

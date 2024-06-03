@@ -6,9 +6,12 @@ import Shop from './Shop';
 import Horcruxes from './Horcruxes';
 import Historic from './Historic';
 import SelectUnivers from './SelectUnivers';
+import ModalVictory from './ModalVictory';
+import { useSelector } from 'react-redux';
 
-
-const App = () => (
+const App = () => {
+    
+  return (
   <div className="App">
       <Shop />
       <Horcruxes />
@@ -19,7 +22,9 @@ const App = () => (
       </section>
       <Historic />
       <SelectUnivers />
+      <ModalVictory/>
   </div>
 )
+}
 
 export default App;
