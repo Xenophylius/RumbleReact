@@ -6,8 +6,6 @@ import disney from "./json/disney.json";
 import marvel from "./json/marvel.json";
 import toaster from "./functions/toaster";
 import animate from "./functions/animate";
-import { useDispatch } from "react-redux";
-import ModalVictory from "../../Components/ModalVictory";
 
 let randomNumber1 = Math.floor(Math.random() * 7)
 let randomNumber2 = Math.floor(Math.random() * 13)
@@ -270,10 +268,10 @@ export const fightSlice = createSlice({
           animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationHeal")
           toaster("#healingHero", value, pvGiven, "+", "healinigSpanHero", "healinigSpanHero animateHealingHero")
         }
+        let message = 'Vous utilisez une potion Wiggenweld, vos élèves récupérent 50 points de vies.'
+        state.historic.push(message)
+        return state
       })
-      let message = 'Vous utilisez une potion Wiggenweld, vos élèves récupérent 50 points de vies.'
-      state.historic.push(message)
-      return state
     }
     
     },
@@ -288,7 +286,8 @@ export const fightSlice = createSlice({
             let id = '#card' +  value
             animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 AnimationMana")
             toaster("#manaHero", value, manaGiven, "+", "healinigSpanHero", "healinigSpanHero animateManaHero", ' PM')
-          }        
+          }      
+          return state   
         })
         let message = 'Vous utilisez une potion de Concentration, vos élèves récupérent leur mana.'
         state.historic.push(message)
@@ -337,8 +336,8 @@ export const fightSlice = createSlice({
       state.players.map((key, value) => {
         let id = '#card' +  value
         animate(id,"card-body text-center m-0 p-0", "card-body text-center m-0 p-0 animationSpecial")
+        return state
       })
-      return state
     },
 
     displayNone: (state, action) => {

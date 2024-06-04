@@ -1,5 +1,3 @@
-import React from 'react'
-
 function toaster(div, id, hit, positive, classStart, classAnimate, mana) {
   if (!mana) {
       mana = ' PV'

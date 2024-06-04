@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin, doubleLife, doubleMana, doubleMaxima, animateHorcruxe, healing, hitMana, disabledButton, displayNone, addHorcruxeApply, displayToggleDivAll } from '../features/fight/fightSlice';
+import { doubleLife, doubleMana, doubleMaxima, animateHorcruxe, healing, displayNone, displayToggleDivAll } from '../features/fight/fightSlice';
 
 
 function Horcruxes() {
@@ -73,7 +73,7 @@ const horcruxeMaxima = () => {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown d-flex align-items-center" id="shopItems">
             <div className="me-3 pt-2 h5" id="gallionsAnimate"></div>    
-                <button className="nav-link dropdown-toggle me-2" role="button" data-bs-toggle="dropdown" aria-expanded="true" title="Niveau et Horcruxes (Vaincre un professeur pour obtenir un Horcruxe)">
+                <button className="nav-link dropdown-toggle me-2" data-bs-toggle="dropdown" aria-expanded="true" title="Niveau et Horcruxes (Vaincre un professeur pour obtenir un Horcruxe)">
                     <i className="fa-solid fa-hat-wizard fa-2xl text-light  horcruxeButton" id="shopHorcruxeId"></i>
                 </button>
                     <ul className="dropdown-menu text-light bg-first border border-light d-none" id="horcruxeDisplay">

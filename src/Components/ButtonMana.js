@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { countLap, hitMonster, disabledButton, hitBack, checkWin, checkMana, checkTurn, gallionsUp, hitMana } from '../features/fight/fightSlice';
+import { countLap, disabledButton, hitBack, checkWin, checkTurn, gallionsUp, hitMana } from '../features/fight/fightSlice';
 
 
 const ButtonCapacity = props => {

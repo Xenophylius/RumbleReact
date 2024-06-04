@@ -12,7 +12,7 @@ const PlayerCard = props => {
 
         let imagePlayer = props.player.image
 
-        if (imagePlayer == '') {
+        if (imagePlayer === '') {
             imagePlayer = 'https://www.newzilla.net/wp-content/uploads/2014/04/crest-150x150.png'
         }       
         
@@ -55,14 +55,14 @@ const PlayerCard = props => {
                         <div className="healinigSpanHero fw-bold" id={`healingHero${player.id}`}></div>
                         <div className="healinigSpanHero fw-bold" id={`manaHero${player.id}`}></div>
                         <div className='horcruxeApply position-absolute start-0 bottom-0'>
-                            <img className='me-2 horcruxesImg d-none' src={itemLifeUrl} title='(Vie doublée)' id='horcruxeLife'/><br/>
-                            <img className='me-2 horcruxesImg d-none' src={itemManaUrl} title='(Mana doublée)' id='horcruxeMana'/><br/>
-                            <img className='me-2 horcruxesImg d-none' src={itemMaximaUrl} title='(Dégâts doublés)' id='horcruxeMaxima'/>
+                            <img className='me-2 horcruxesImg d-none' src={itemLifeUrl} title='(Vie doublée)' id='horcruxeLife' alt='Vie doublée'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src={itemManaUrl} title='(Mana doublée)' id='horcruxeMana' alt='Mana doublée'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src={itemMaximaUrl} title='(Dégâts doublés)' id='horcruxeMaxima' alt='Dégâts doublés'/>
 
                         
                         </div>
                         
-                        <img src={imagePlayer} className='img-fluid mb-2 rounded-5' />
+                        <img src={imagePlayer} className='img-fluid mb-2 rounded-5' alt='Joueur'/>
                     </div>
                     <div className='row justify-content-center'>
                         <ProgressBar id={player.id} pv={player.pv} pvMax={player.pvMax} faType='fa-heart' barName=' PV ' bgType='bg-danger' />

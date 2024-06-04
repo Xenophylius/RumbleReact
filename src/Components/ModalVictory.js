@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { useDispatch, useState, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal2 } from '../features/fight/fightSlice';
 
 const customStyles = {
@@ -32,9 +32,9 @@ function ModalVictory() {
   const gallions = useSelector(state => state.fight.gallions)
   const dispatch = useDispatch();
 
-  const openModal = () => {
-    dispatch(openModal2(true))
-  }
+  // const openModal = () => {
+  //   dispatch(openModal2(true))
+  // }
 
   function afterOpenModal() {
     subtitle.style.color = '#7F99E8';

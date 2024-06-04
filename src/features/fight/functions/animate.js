@@ -1,5 +1,3 @@
-import React from 'react'
-
 function animate(div, classStart, classAnimate) {
     
   return (

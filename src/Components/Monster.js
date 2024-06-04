@@ -1,7 +1,6 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
 import { useSelector } from 'react-redux'; 
-import { useEffect } from 'react';
 
 function Monster() {
 

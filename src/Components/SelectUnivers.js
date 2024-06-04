@@ -31,9 +31,9 @@ function SelectUnivers() {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   const dispatch = useDispatch();
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
   function afterOpenModal() {
     subtitle.style.color = '#7F99E8';
@@ -75,10 +75,10 @@ function SelectUnivers() {
 
         <h2 className='text-center mb-5' ref={(_subtitle) => (subtitle = _subtitle)}>Selectionne ton univers</h2>
         <div className='row justify-content-center'>
-            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/disney2.png' onClick={disneyChange}/>
-            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/hogwarts.png' onClick={hogwarts}/>
-            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/got.png' onClick={gotChange}/>
-            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/marvel.png' onClick={marvelChange}/>
+            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/disney2.png' onClick={disneyChange} alt='Disney logo'/>
+            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/hogwarts.png' onClick={hogwarts} alt='Harry Potter logo'/>
+            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/got.png' onClick={gotChange} alt='Game of Throne logo'/>
+            <img className='logoUnivers col-12 col-md-6 col-xl-3' src='./images/marvel.png' onClick={marvelChange} alt='Marvel logo'/>
         </div>
 
       </Modal>

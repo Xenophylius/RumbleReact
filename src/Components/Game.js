@@ -7,7 +7,6 @@ import Horcruxes from './Horcruxes';
 import Historic from './Historic';
 import SelectUnivers from './SelectUnivers';
 import ModalVictory from './ModalVictory';
-import { useSelector } from 'react-redux';
 
 const App = () => {
     

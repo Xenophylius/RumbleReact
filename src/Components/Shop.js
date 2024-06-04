@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin, disabledButton, checkMana } from '../features/fight/fightSlice';
+import { gallionsDown, lifeUpAll, manaUpAll, hitMonster, checkWin } from '../features/fight/fightSlice';
 
 
 function Shop() {
@@ -32,14 +32,14 @@ const potionMaxima = () => {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown d-flex align-items-center" id="shopItems">
             <div className="me-3 pt-2 h5" id="gallionsAnimate"></div>
-                <button className="nav-link dropdown-toggle me-2 shopButton" role="button" data-bs-toggle="dropdown" aria-expanded="false" title={`${gallions} Gallions`}>
+                <button className="nav-link dropdown-toggle me-2 shopButton" data-bs-toggle="dropdown" aria-expanded="false" title={`${gallions} Gallions`}>
                     <i className="fa-solid fa-sack-dollar fa-2xl text-warning"></i>
                 </button>
                     <ul className="dropdown-menu text-light bg-first-without-cursor border border-light" >
                         <li className="dropdown-item text-light bg-first-without-cursor"><i className="fa-solid fa-sack-dollar me-2 text-warning"></i>{gallions} Gallions</li>
                     </ul>
     
-                <button className="nav-link dropdown-toggle me-2 shopButton" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Potions">
+                <button className="nav-link dropdown-toggle me-2 shopButton" data-bs-toggle="dropdown" aria-expanded="false" title="Potions">
                     <i className="fa-solid fa-flask fa-2xl text-warning" id="shopFlaskId"></i>
                 </button>
                     <ul className="dropdown-menu text-light bg-first border border-light">
