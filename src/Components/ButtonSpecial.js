@@ -11,8 +11,8 @@ const ButtonSpecial = props => {
         dispatch(countLap())
         dispatch(disabledButton({id: props.player.id}))
         dispatch(gallionsUp(20))
-        dispatch(checkMana({id: props.player.id}))
         dispatch(hitMonster({hit: attack, mana: 16, id: props.player.id, special: true}))
+        dispatch(checkMana({id: props.player.id}))
             setTimeout(() => {
                 dispatch(hitBack({hit: 5,id: props.player.id}))
                 dispatch(checkWin(props.player.id))

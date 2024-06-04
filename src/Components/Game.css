@@ -31,7 +31,7 @@
 
   #shop {
     margin: 0 !important;
-    margin-top: 4vh !important;
+    
     padding: 0 !important;
   }
 
@@ -178,6 +178,13 @@ body {
   color: white;
   background-image: url('https://i.gifer.com/MXGi.gif');
   background-position: right;
+}
+
+#arena {
+  background-image: url('../../public/images/harrypotterBattleground.jpg');
+  background-position: 50% 50%; 
+  background-size: cover;
+  min-height: 40vh !important;
 }
 
 .shopFlask {
@@ -650,11 +657,12 @@ display: block;
 .img-fluid {
   max-height: 150px !important;
   min-height: 150px !important;
-  max-width: 58% !important;
+  max-width: 82% !important;
+  
 }
 
 .logoUnivers {
-  height: 200px !important;
+  height: 220px !important;
   opacity: 0.7;
   cursor: pointer;
 }
@@ -777,10 +785,10 @@ overflow: visible;
 
 
 .titleMonster {
-  z-index: 20 !important;
-  background-color: #232323;
-  background-image: url('https://images6.alphacoders.com/853/thumb-1920-853375.png');
-  background-position: 50% 5%;
+  /* z-index: 20 !important;
+  background-color: #232323; */
+  /* background-image: url('https://images6.alphacoders.com/853/thumb-1920-853375.png');
+  background-position: 50% 5%; */
   
 }
 
@@ -792,6 +800,7 @@ overflow: visible;
   color: white;
   z-index: 10;
   font-style: italic;
+  font-weight: bold;
 }
 
 .animateSpanMonster {
@@ -809,6 +818,8 @@ overflow: visible;
   color: red !important;
   z-index: 10;
   font-style: italic;
+  font-weight: bold;
+
 }
 
 .animateSpanHero {

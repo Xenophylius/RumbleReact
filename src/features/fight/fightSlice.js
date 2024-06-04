@@ -25,7 +25,8 @@ const initialState = {
   killMonster: 1,
   hitBase: 50,
   historic: ['Bienvenue au club de duel'],
-  victory: false
+  victory: false,
+  theme: 'hogwarts'
 };
 
 export const fightSlice = createSlice({
@@ -360,6 +361,7 @@ export const fightSlice = createSlice({
       let randomMonster = Math.floor(Math.random() * 48)
       state.monster.name = got[randomMonster].fullName
       state.monster.image = got[randomMonster].imageUrl
+      state.theme = 'got'
 
       let i = 1
       state.players.forEach(element => {
@@ -374,6 +376,7 @@ export const fightSlice = createSlice({
       let randomMonster = Math.floor(Math.random() * 45)
       state.monster.name = disney[randomMonster].name
       state.monster.image = disney[randomMonster].imageUrl
+      state.theme = 'disney'
 
       let i = 1
       state.players.forEach(element => {
@@ -392,6 +395,7 @@ export const fightSlice = createSlice({
       let randomMonster = Math.floor(Math.random() * 23)
       state.monster.name = marvel[randomMonster].name
       state.monster.image = marvel[randomMonster].thumbnail.path + '.' + marvel[randomMonster].thumbnail.extension
+      state.theme = 'marvel'
 
       let i = 1
       state.players.forEach(element => {
@@ -403,10 +407,9 @@ export const fightSlice = createSlice({
     },
 
     changeForHogwarts: (state, action) => {
-      
-
       state.monster.name = monster[randomNumber2].name
       state.monster.image = monster[randomNumber2].image
+      state.theme = 'hogwarts'
 
       let i = 0
       state.players.forEach(element => {

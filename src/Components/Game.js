@@ -16,7 +16,7 @@ const App = () => {
       <Shop />
       <Horcruxes />
       <Monster />
-      <br></br>
+      
       <section className="container-fluid">
           <PlayerList />
       </section>

@@ -17,7 +17,29 @@ const PlayerCard = props => {
         }       
         
         const player = useSelector(state => state.fight.players[props.player.id])
-    
+        const theme = useSelector(state => state.fight.theme)
+
+        let itemLifeUrl = './images/colierHorcruxe.png'
+        let itemManaUrl = './images/coupeHorcruxe.png'
+        let itemMaximaUrl = './images/anneauxHorcruxe.png'
+        
+        if (theme === 'disney') {
+            itemLifeUrl = './images/mickey.png'
+            itemManaUrl = './images/mini.png'
+            itemMaximaUrl = './images/simba.png'
+        }
+        
+        if (theme === 'got') {
+            itemLifeUrl = './images/stark.png'
+            itemManaUrl = './images/targaryen.png'
+            itemMaximaUrl = './images/arryn.png'
+        }
+        
+        if (theme === 'marvel') {
+            itemLifeUrl = './images/shield.png'
+            itemManaUrl = './images/hammer.png'
+            itemMaximaUrl = './images/helmet.png'
+        }
 
         return ( 
             <div key={player.id} className={`${props.cardDiv}`} id={`joueur${player.id}`}>
@@ -29,13 +51,13 @@ const PlayerCard = props => {
                                 <h5 className={`pt-2 pb-2 ${player.home}`}>{player.name}</h5>
                             </div>
 
-                        <div className="degatSpanHero" id={`spanHero${player.id}`}></div>
-                        <div className="healinigSpanHero" id={`healingHero${player.id}`}></div>
-                        <div className="healinigSpanHero" id={`manaHero${player.id}`}></div>
-                        <div className='horcruxeApply position-absolute start-0 '>
-                            <img className='me-2 horcruxesImg d-none' src='./images/colierHorcruxe.png' alt="Médaillon de Salazar Serpentard" title='Médaillon de serpentard (Vie doublée)' id='horcruxeLife'/><br/>
-                            <img className='me-2 horcruxesImg d-none' src='./images/coupeHorcruxe.png' alt="Coupe de Poufsouffle" title='Coupe de Poufsouffle (Mana doublée)' id='horcruxeMana'/><br/>
-                            <img className='me-2 horcruxesImg d-none' src='./images/anneauxHorcruxe.png' alt="Bague de Gaunt" title='Bague de Gaunt (Dégâts doublés)' id='horcruxeMaxima'/>
+                        <div className="degatSpanHero fw-bold" id={`spanHero${player.id}`}></div>
+                        <div className="healinigSpanHero fw-bold" id={`healingHero${player.id}`}></div>
+                        <div className="healinigSpanHero fw-bold" id={`manaHero${player.id}`}></div>
+                        <div className='horcruxeApply position-absolute start-0 bottom-0'>
+                            <img className='me-2 horcruxesImg d-none' src={itemLifeUrl} title='(Vie doublée)' id='horcruxeLife'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src={itemManaUrl} title='(Mana doublée)' id='horcruxeMana'/><br/>
+                            <img className='me-2 horcruxesImg d-none' src={itemMaximaUrl} title='(Dégâts doublés)' id='horcruxeMaxima'/>
 
                         
                         </div>

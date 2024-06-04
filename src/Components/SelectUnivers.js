@@ -70,7 +70,7 @@ function SelectUnivers() {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Select Theme"
       >
 
         <h2 className='text-center mb-5' ref={(_subtitle) => (subtitle = _subtitle)}>Selectionne ton univers</h2>

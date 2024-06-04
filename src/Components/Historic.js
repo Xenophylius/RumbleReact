@@ -7,7 +7,6 @@ function Historic() {
 
 const dispatch = useDispatch();
 const historic = useSelector(state => state.fight.historic)
-
 const displayToggle = () => {
     dispatch(displayToggleDiv('#historicDisplay'))
 }
