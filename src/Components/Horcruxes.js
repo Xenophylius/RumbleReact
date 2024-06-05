@@ -67,11 +67,13 @@ const horcruxeMaxima = () => {
 
 }
 
+
   return (
     <div className='position-fixed text-light start-0 ms-1 mt-2' id="shop">
 
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown d-flex align-items-center" id="shopItems">
+                <a href='/'><i className="fa-solid fa-house-chimney fa-2xl text-light horcruxeItems opacity-75" id="shopHorcruxeId"></i></a>
             <div className="me-3 pt-2 h5" id="gallionsAnimate"></div>    
                 <button className="nav-link dropdown-toggle me-2" data-bs-toggle="dropdown" aria-expanded="true" title="Niveau et Horcruxes (Vaincre un professeur pour obtenir un Horcruxe)">
                     <i className="fa-solid fa-hat-wizard fa-2xl text-light  horcruxeButton" id="shopHorcruxeId"></i>
