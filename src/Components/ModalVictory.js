@@ -56,7 +56,7 @@ function ModalVictory() {
 
         <h2 className='text-center mb-5' ref={(_subtitle) => (subtitle = _subtitle)}>Victoire</h2>
         <div className='row justify-content-center'>
-            <p className='text-center'>Vous êtes désormais niveau {killMonster}. Le héro adversire va changer et devenir plus fort.</p> 
+            <p className='text-center'>Vous êtes désormais niveau {killMonster}. Le héro adverse va changer et devenir plus fort.</p> 
             <p className='text-center'>Vous pouvez choisir un Objet special <i className="fa-solid fa-hat-wizard fa-lg text-dark"></i> afin de vous aider.</p>
             <p className='text-center'>Vous avez aussi à votre diposition des potions <i className="fa-solid fa-flask fa-lg text-warning"></i> contre des gallions.</p>
             <p className='text-center'>Vous disposez de {gallions} gallions. <i className="fa-solid fa-sack-dollar fa-lg text-warning"></i></p>

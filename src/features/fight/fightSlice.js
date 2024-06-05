@@ -171,8 +171,6 @@ export const fightSlice = createSlice({
         id = 0
       }
 
-
-
       while(document.querySelector('#joueur' + id).className.includes('disabledbutton')) {
         id = id + 1
       }
