@@ -20,6 +20,13 @@
   }
 }
 
+@media (max-width: 767px) { 
+  .logoUnivers {
+    max-height: 150px !important;
+    max-width: 200px !important;
+  }
+}
+
 @media (max-width: 698px) { 
   .degatSpanMonster {
     right: 100px !important;
@@ -46,7 +53,9 @@
   }
 }
 
-
+.modalIndex {
+  z-index: 10000 !important;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

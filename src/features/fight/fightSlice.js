@@ -198,8 +198,21 @@ export const fightSlice = createSlice({
       if (state.monster.pv <= 0) {
         state.killMonster = state.killMonster + 1
         state.victory = true
-        let randomMonster = Math.floor(Math.random() * 7);
-        state.monster = {name: monster[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: monster[randomMonster].image}
+
+        if (state.theme === 'got') {
+          let randomMonster = Math.floor(Math.random() * 48)
+          state.monster = {name: got[randomMonster].fullName, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: got[randomMonster].imageUrl}
+        } else if (state.theme === 'hogwarts') {
+          let randomMonster = Math.floor(Math.random() * 7);
+          state.monster = {name: monster[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: monster[randomMonster].image}
+        } else if (state.theme === 'disney') {
+          let randomMonster = Math.floor(Math.random() * 45)
+          state.monster = {name: disney[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: disney[randomMonster].imageUrl}
+        } else if (state.theme === 'marvel') {
+          let randomMonster = Math.floor(Math.random() * 23)
+          state.monster = {name: marvel[randomMonster].name, pv: (1000 * state.killMonster), pvMax: (1000 * state.killMonster), image: marvel[randomMonster].thumbnail.path + '.' + marvel[randomMonster].thumbnail.extension}
+        }
+
         state.gallions = state.gallions + 100
         toaster("#gallionsAnimate", '', 100, '+', "me-3 pt-2 h5", "me-3 pt-2 h5 AnimationGallions", ' Gal')
         document.querySelector('#horcruxeDisplay').classList.toggle('d-none')

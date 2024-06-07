@@ -31,10 +31,6 @@ function SelectUnivers() {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   const dispatch = useDispatch();
 
-  // function openModal() {
-  //   setIsOpen(true);
-  // }
-
   function afterOpenModal() {
     subtitle.style.color = '#7F99E8';
   }
